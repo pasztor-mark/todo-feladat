@@ -1,7 +1,7 @@
 export interface ColumnProps {
     elements: TodoElement[]
-    color: string
     status: Status
+    userId: number
 }
 export enum Priority {
     P0, P1, P2, P3
@@ -13,7 +13,8 @@ export interface TodoElement {
     id: number,
     title: string,
     description: string,
-    dueDate: string,
+    due_date: string,
     priority: Priority,
     status: Status
+    userId?: number
 }

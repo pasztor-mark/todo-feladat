@@ -17,10 +17,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const id = localStorage.getItem('id');
         const username = localStorage.getItem('username');
-        if (id !== null && username !== null) {
-            setUserId(parseInt(id));
+            setUserId(parseInt(id!));
             setUsername(username);
-        }
+        
     }, [])
     const login = async (username: string) => {
         console.log(username);
@@ -34,9 +33,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log(response);
         if (response.ok) {
             const data = await response.json();
-            setUserId(data.userId);
+            setUserId(data.id);
+            console.log(data.id);
+            console.log(data);
             setUsername(data.username);
-            localStorage.setItem('id', data.userId);
+            localStorage.setItem('id', data.id);
             localStorage.setItem('username', data.username);
         }
     };

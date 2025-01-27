@@ -34,7 +34,16 @@ app.post("/api/authenticate", (req, res) => {
       }
     })
 })
-
+app.post("/api/:userId/todos", (req, res) => {
+    const query = "INSERT INTO todos (user_id, title, description, due_date, priority, status) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(query, [req.params.userId, req.body.title, req.body.description, req.body.due_date, req.body.priority, req.body.status], (err, result) => {
+      if (err) {
+        res.status(500)
+      } else {
+        res.status(201).json({ id: result.insertId, user_id: req.params.userId, title: req.body.title, description: req.body.description, due_date: req.body.due_date, priority: req.body.priority, status: req.body.status });
+      }
+})
+})
 app.get("/api/:userId/todos", (req, res) => {
   const query = "SELECT * FROM todos WHERE user_id = ?";
   db.query(query, [req.params.userId], (err, result) => {
@@ -45,7 +54,26 @@ app.get("/api/:userId/todos", (req, res) => {
     }
   })
 });
-
+app.delete("/api/:userId/todos/:todoId", (req, res) => {
+  const query = "DELETE FROM todos WHERE user_id = ? AND id = ?";
+  db.query(query, [req.params.userId, req.params.todoId], (err, result) => {
+    if (err) {
+      res.status(500)
+    } else {
+      res.status(204).send();
+    }
+  })
+})
+app.put("/api/:userId/todos/:todoId", (req, res) => {
+  const query = "UPDATE todos SET status = ? WHERE user_id = ? AND id = ?";
+  db.query(query, [req.body.status, req.params.userId, req.params.todoId], (err, result) => {
+    if (err) {
+      res.status(500)
+    } else {
+      res.status(200).json({ status: req.body.status });
+    }
+  })
+})
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
