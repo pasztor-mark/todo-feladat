@@ -18,3 +18,7 @@ export interface TodoElement {
     status: Status
     userId?: number
 }
+export interface ProfileProps {
+    username: string,
+    todoCount: number,
+}

@@ -28,7 +28,7 @@ export function getTitleByStatus(status: number) {
 export function getColumnColorByStatus(status: number) {
     switch(status) {
         case 0:
-            return '#00FF00';
+            return '#0000FF';
         case 1:
             return '#FFFF00';
         case 2:
@@ -37,15 +37,15 @@ export function getColumnColorByStatus(status: number) {
             return '#FF00FF';
     }
 }
-export  function getRowColorByPriority(priority: Priority) {
+export  function getRowColorByPriority(priority: keyof typeof Priority) {
     switch(priority) {
-        case Priority.P0:
-            return '#400400';
-        case Priority.P1:
-            return '#594100';
-        case Priority.P2:
-            return '#400400';
-        case Priority.P3:
-            return '#024f02';
+        case "P0":
+            return '#00FF00';
+        case "P1":
+            return '#FFFF00';
+        case "P2":
+            return '#00FF00';
+        case "P3":
+            return '#FF00FF';
     }
 }

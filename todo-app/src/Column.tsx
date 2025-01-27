@@ -21,7 +21,7 @@ async function handleTodoCreation() {
 }
 
     
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit() {
         console.log(await handleTodoCreation());
         
     }
@@ -53,9 +53,10 @@ async function handleTodoCreation() {
             </div>
             <div className="flex flex-col gap-4">
                 {
+                    elements.length > 0 ?
                     elements.map((element, index) => (
                         <Row key={index} {...element} userId={userId} />
-                    ))
+                    )) : <p className="text-center text-3xl">No todos in this column</p>
                 }
             </div>
         </div>

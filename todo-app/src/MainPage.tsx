@@ -1,4 +1,6 @@
+import { Link } from "react-router";
 import { AuthContextType } from "./AuthContext";
+import Clock from "./Clock";
 import Column from "./Column";
 import { getVerboseStatus } from "./functions";
 import { Status, TodoElement } from "./types";
@@ -12,11 +14,13 @@ export default function MainPage({
   return (
     <div className="flex flex-col pt-12 w-screen h-screen overflow-x-hidden">
       <div className="w-full h-12 fixed top-0 bg-blue-500 text-white flex justify-between px-12 items-center">
-        <h1 className="text-2xl font-bold">Todo App</h1>
-        <p>
+        <Clock />
+        <p className="flex flex-row-reverse items-center">
+          <Link to={`/profile/${userId}`} className="mr-2">
           Logged in as {username}
+          </Link>
           <button
-            className="border border-red-500 ml-2 px-2 rounded-lg"
+            className="border border-red-500 mr-2 bg-red-500 font-bold text-lg px-2 rounded-lg"
             onClick={() => {
               logout();
             }}

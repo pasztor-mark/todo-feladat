@@ -1,7 +1,7 @@
 import { getRowColorByPriority } from "./functions";
-import { Status, TodoElement } from "./types";
+import { Priority, Status, TodoElement } from "./types";
 
-export default function Row({description, due_date, priority, title, id, userId, status}: TodoElement) {
+export default function Row({description, due_date, priority, title, id, userId}: TodoElement) {
     async function handleItemDelete() {
          await fetch(`http://localhost:5000/api/${userId}/todos/${id}`, {
             method: 'DELETE'
@@ -20,7 +20,7 @@ export default function Row({description, due_date, priority, title, id, userId,
         window.location.reload()
     }
     return (
-        <div className={`flex flex-row justify-between items-center p-4 rounded-md`} style={{border: `3px solid ${getRowColorByPriority(priority)}`}}>
+        <div className={`flex flex-row justify-between items-center p-4 rounded-md`} style={{border: `3px solid ${getRowColorByPriority(priority as unknown as keyof typeof Priority)}`}}>
             <div className="flex flex-col">
             <p className="text-xl font-semibold">{title}</p>
             <p>due by <b>{due_date}</b></p>
